@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """This module contains util for work with brackets expressions.
 This util is implemented in class BracketExpression.
 Use this class to create and validate brackets expresiions.
@@ -6,8 +7,10 @@ import sys
 
 
 class BracketExpression:
-    """Class BracketExpression is used to check balance of brackets in any expression.
-    Actually, instance of class BracketExpression is simple string with util method isValid() which checks balance of brackets in it.
+    """Class BracketExpression is used to check
+    balance of brackets in any expression.
+    Actually, instance of class BracketExpression is simple string
+    with util method isValid() which checks balance of brackets in it.
     """
 
     __opened = ["(", "[", "{", "<"]
@@ -32,10 +35,11 @@ class BracketExpression:
         """
 
         # If expression is already validated, just return result.
-        if not self.__isExpressionValid == None:
+        if self.__isExpressionValid is not None:
             return self.__isExpressionValid
 
-        # Lazy preparing of brackets map for case when isValid() is not called for expression.
+        # Lazy preparing of brackets map for case when
+        # isValid() is not called for expression.
         if not self.__bracketsMap:
             self.__bracketsMap = dict(zip(self.__opened, self.__closed))
 
@@ -54,18 +58,21 @@ class BracketExpression:
                     # Pop the latest opened brackets from stack.
                     bracket = bracketsStack.pop()
                 except:
-                    # If stack is empty, there is no opened bracket for this closed bracket.
+                    # If stack is empty, there is no opened bracket
+                    # for this closed bracket.
                     # All opened brackets are closed. Expression is not valid.
                     self.__isExpressionValid = False
                     return self.__isExpressionValid
                 else:
-                    # If the latest opened brackets doesn't correspond to for this closed bracket, expression is not valid.
+                    # If the latest opened brackets doesn't correspond
+                    # to this closed bracket, expression is not valid.
                     # Otherwise, continue to check.
                     if not self.__bracketsMap[bracket] == letter:
                         self.__isExpressionValid = False
                         return self.__isExpressionValid
 
-        # If stack is not empty, there are opened bracked which are not closed. Expression is not valid.
+        # If stack is not empty, there are opened bracked which are not closed,
+        # expression is not valid.
         # Otherwise, all brackets are closed. Expression is valid.
         if bracketsStack:
             self.__isExpressionValid = False
